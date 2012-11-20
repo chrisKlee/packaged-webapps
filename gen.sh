@@ -26,6 +26,7 @@ if command -v tidy >/dev/null 2>&1; then
 fi
 
 echo "Pushing to server..."
+git add index.html
 git commit -a -m "Regenerated file"
 git push
 
