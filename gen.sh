@@ -10,16 +10,20 @@ if [ $? -ne 0 ]; then
        echo "$0: Can't create temp file, exiting..."
        exit 1
 fi
+echo "Firing up anolis"
 anolis --pubdate="$1" --output-encoding=utf8 --omit-optional-tags --quote-attr-values --w3c-compat --w3c-shortname="widgets" --filter=".dontpublish, .now3c" --w3c-status=REC Overview.src.html $TMPFILE
 
+echo "Switching to gh-pages"
 git checkout gh-pages
 cp $TMPFILE index.html
 
 #dependency: html5 tidy https://github.com/w3c/tidy-html5
 if command -v tidy >/dev/null 2>&1; then
+	echo "Runing HTML5 tidy..."
 	tidy -q -utf8 -i -o index.html index.html
 fi
 
+echo "Pushing to server..."
 git commit -a -m "Regenerated file"
 git push
 
