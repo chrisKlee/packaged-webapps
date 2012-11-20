@@ -20,7 +20,7 @@ if command -v tidy >/dev/null 2>&1; then
 	tidy -q -utf8 -i -o index.html index.html
 fi
 
-git commit -m "Regenerated file"
+git commit -a -m "Regenerated file"
 git push
 
 #dependency: sudo gem install terminal-notifier
